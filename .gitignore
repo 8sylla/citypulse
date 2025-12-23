@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# npm cache
+.npm/
+
+# Node-RED runtime data
+data/nodered/.npm/
+data/nodered/node_modules/
+
+# Logs
+*.log
+
+# Scala / SBT
+target/
+*.jar
+*.class
+

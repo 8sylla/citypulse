@@ -1,0 +1,179 @@
+[
+    {
+        "id": "traffic_flow",
+        "type": "tab",
+        "label": "CityPulse Simulation",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d913bb1cb9b8162c",
+        "type": "kafka-broker",
+        "name": "CityPulse Kafka",
+        "hosts": "citypulse-kafka:9092",
+        "selfsign": false,
+        "usetls": false,
+        "cacert": "",
+        "clientcert": "",
+        "privatekey": "",
+        "passphrase": ""
+    },
+    {
+        "id": "inject_traffic",
+        "type": "inject",
+        "z": "traffic_flow",
+        "name": "Tick 1s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "gen_traffic"
+            ]
+        ]
+    },
+    {
+        "id": "gen_traffic",
+        "type": "function",
+        "z": "traffic_flow",
+        "name": "Generate Traffic Data",
+        "func": "var districts = [\"Centre\", \"Nord\", \"Sud\", \"Est\", \"Ouest\"];\nvar id = \"cam_\" + Math.floor(Math.random() * 100);\nvar district = districts[Math.floor(Math.random() * districts.length)];\n\n// Simulation lat/lon approximative Paris\nvar lat = 48.85 + (Math.random() * 0.1 - 0.05);\nvar lon = 2.35 + (Math.random() * 0.1 - 0.05);\n\nmsg.payload = {\n    sensor_id: id,\n    district: district,\n    lat: lat,\n    lon: lon,\n    speed_kmh: Math.floor(Math.random() * 130),\n    vehicle_count: Math.floor(Math.random() * 50),\n    timestamp: new Date().toISOString()\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 100,
+        "wires": [
+            [
+                "kafka_traffic",
+                "debug_traffic"
+            ]
+        ]
+    },
+    {
+        "id": "kafka_traffic",
+        "type": "kafka-producer",
+        "z": "traffic_flow",
+        "name": "Traffic Producer",
+        "broker": "d913bb1cb9b8162c",
+        "topic": "traffic-raw",
+        "requireAcks": 1,
+        "ackTimeoutMs": 100,
+        "x": 600,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "inject_pollution",
+        "type": "inject",
+        "z": "traffic_flow",
+        "name": "Tick 2s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "gen_pollution"
+            ]
+        ]
+    },
+    {
+        "id": "gen_pollution",
+        "type": "function",
+        "z": "traffic_flow",
+        "name": "Generate Pollution Data",
+        "func": "var districts = [\"Centre\", \"Nord\", \"Sud\", \"Est\", \"Ouest\"];\nvar id = \"air_\" + Math.floor(Math.random() * 50);\nvar district = districts[Math.floor(Math.random() * districts.length)];\n\nmsg.payload = {\n    sensor_id: id,\n    district: district,\n    pm25: Math.floor(Math.random() * 100),\n    co2: 400 + Math.floor(Math.random() * 200),\n    timestamp: new Date().toISOString()\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "kafka_pollution",
+                "debug_pollution"
+            ]
+        ]
+    },
+    {
+        "id": "kafka_pollution",
+        "type": "kafka-producer",
+        "z": "traffic_flow",
+        "name": "Pollution Producer",
+        "broker": "d913bb1cb9b8162c",
+        "topic": "pollution-raw",
+        "requireAcks": 1,
+        "ackTimeoutMs": 100,
+        "x": 610,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "debug_traffic",
+        "type": "debug",
+        "z": "traffic_flow",
+        "name": "View Traffic",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "debug_pollution",
+        "type": "debug",
+        "z": "traffic_flow",
+        "name": "View Pollution",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 300,
+        "wires": []
+    }
+]
