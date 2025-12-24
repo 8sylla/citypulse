@@ -43,7 +43,7 @@
     },
     {
         "id": "kafka_traffic",
-        "type": "kafka",
+        "type": "kafka-producer",
         "z": "traffic_flow",
         "name": "Traffic Producer",
         "broker": "citypulse-kafka:9092",
@@ -91,7 +91,7 @@
     },
     {
         "id": "kafka_pollution",
-        "type": "kafka",
+        "type": "kafka-producer",
         "z": "traffic_flow",
         "name": "Pollution Producer",
         "broker": "citypulse-kafka:9092",
