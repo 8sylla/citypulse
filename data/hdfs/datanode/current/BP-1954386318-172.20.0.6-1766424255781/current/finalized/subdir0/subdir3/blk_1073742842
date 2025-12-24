@@ -1,0 +1,2 @@
+v1
+{"path":"hdfs://citypulse-namenode:9000/data/silver/pollution/district=Est/part-00000-d577b47f-0594-41e7-a1ad-ebd6da69d796.c000.snappy.parquet","size":1238,"isDir":false,"modificationTime":1766603911242,"blockReplication":3,"blockSize":134217728,"action":"add"}

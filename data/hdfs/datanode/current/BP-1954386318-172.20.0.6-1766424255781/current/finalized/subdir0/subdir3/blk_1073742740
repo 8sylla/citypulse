@@ -1,0 +1,4 @@
+v1
+{"path":"hdfs://citypulse-namenode:9000/data/silver/pollution/district=Centre/part-00000-d4d57e39-24d2-419a-a772-45c1ea1a7a11.c000.snappy.parquet","size":1233,"isDir":false,"modificationTime":1766603810989,"blockReplication":3,"blockSize":134217728,"action":"add"}
+{"path":"hdfs://citypulse-namenode:9000/data/silver/pollution/district=Est/part-00000-7a114776-514d-47c5-bf69-5f2073edb92b.c000.snappy.parquet","size":1233,"isDir":false,"modificationTime":1766603811096,"blockReplication":3,"blockSize":134217728,"action":"add"}
+{"path":"hdfs://citypulse-namenode:9000/data/silver/pollution/district=Nord/part-00000-a54c3592-e144-4066-822d-46be4399b98c.c000.snappy.parquet","size":1193,"isDir":false,"modificationTime":1766603811201,"blockReplication":3,"blockSize":134217728,"action":"add"}

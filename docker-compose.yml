@@ -49,8 +49,8 @@ services:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
     container_name: citypulse-namenode
     ports:
-      - "9870:9870" # Web UI
-      - "9000:9000" # IPC
+      - "9870:9870" 
+      - "9000:9000" 
     env_file:
       - ./docker/hadoop.env
     volumes:
@@ -101,8 +101,8 @@ services:
     image: bde2020/spark-master:3.3.0-hadoop3.3
     container_name: citypulse-spark-master
     ports:
-      - "8080:8080" # Web UI
-      - "7077:7077" # Master URL
+      - "8080:8080" 
+      - "7077:7077" 
     environment:
       - INIT_DAEMON_STEP=setup_spark
       - "SPARK_MASTER=spark://spark-master:7077"
@@ -115,11 +115,39 @@ services:
     depends_on:
       - spark-master
     ports:
-      - "8081:8081"
+      - "8081:8081" 
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
-      - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=1    
+      - SPARK_WORKER_MEMORY=1G  
+    networks:
+      - citypulse-net
+
+  spark-worker-2:
+    image: bde2020/spark-worker:3.3.0-hadoop3.3
+    container_name: citypulse-spark-worker-2
+    depends_on:
+      - spark-master
+    ports:
+      - "8082:8081" 
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
+      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=1G
+    networks:
+      - citypulse-net
+
+  spark-worker-3:
+    image: bde2020/spark-worker:3.3.0-hadoop3.3
+    container_name: citypulse-spark-worker-3
+    depends_on:
+      - spark-master
+    ports:
+      - "8083:8081" 
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
+      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=1G
     networks:
       - citypulse-net
 
@@ -131,11 +159,13 @@ services:
     container_name: citypulse-grafana
     ports:
       - "3000:3000"
+    user: "0"  
     environment:
-      # - GF_INSTALL_PLUGINS=hadesarchitect-cassandra-datasource  <-- COMMENTEZ CETTE LIGNE
       - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=hadesarchitect-cassandra-datasource
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=citypulse
+    volumes:
+      - ./data/grafana:/var/lib/grafana  
     networks:
       - citypulse-net
 

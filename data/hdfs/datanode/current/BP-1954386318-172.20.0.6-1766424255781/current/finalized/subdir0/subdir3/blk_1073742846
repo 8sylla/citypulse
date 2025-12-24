@@ -1,0 +1,5 @@
+v1
+{"path":"hdfs://citypulse-namenode:9000/data/silver/traffic/district=Centre/part-00000-cea8259d-ac30-457f-b18e-a22c2aabbd9c.c000.snappy.parquet","size":1772,"isDir":false,"modificationTime":1766603911284,"blockReplication":3,"blockSize":134217728,"action":"add"}
+{"path":"hdfs://citypulse-namenode:9000/data/silver/traffic/district=Nord/part-00000-225fa914-dd23-4850-9e9d-6c2f2172125b.c000.snappy.parquet","size":1774,"isDir":false,"modificationTime":1766603911392,"blockReplication":3,"blockSize":134217728,"action":"add"}
+{"path":"hdfs://citypulse-namenode:9000/data/silver/traffic/district=Ouest/part-00000-0e8b2b09-5709-4f5a-a6eb-49cbb6ba1c6b.c000.snappy.parquet","size":1748,"isDir":false,"modificationTime":1766603911467,"blockReplication":3,"blockSize":134217728,"action":"add"}
+{"path":"hdfs://citypulse-namenode:9000/data/silver/traffic/district=Sud/part-00000-80843e22-722b-41ae-a8d8-078a19c7868e.c000.snappy.parquet","size":1873,"isDir":false,"modificationTime":1766603911545,"blockReplication":3,"blockSize":134217728,"action":"add"}

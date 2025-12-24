@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1766604140452,"sparkVersion":"3.3.0","uid":"vecAssembler_6844c07aefbe","paramMap":{"inputCols":["speed_kmh","vehicle_count"],"outputCol":"features"},"defaultParamMap":{"handleInvalid":"error","outputCol":"vecAssembler_6844c07aefbe__output"}}
