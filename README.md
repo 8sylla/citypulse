@@ -16,8 +16,8 @@
 **`CityPulse`** répond à une problématique urbaine critique : le cloisonnement des données.
 La plateforme ingère des flux IoT simulés, les traite via **`Apache Spark Structured Streaming`**, et fournit une double vue :
 
-> 1.  **`Temps Réel (Speed Layer) :`** Alertes immédiates sur tableau de bord (Grafana/Cassandra).
-> 2.  **`Historique (Batch Layer) :`** Analyse long terme via Data Lake (HDFS/Parquet).
+1.  **`Temps Réel (Speed Layer) :`** Alertes immédiates sur tableau de bord (Grafana/Cassandra).
+2.  **`Historique (Batch Layer) :`** Analyse long terme via Data Lake (HDFS/Parquet).
 
 ### 🚦 Logique Métier (Alerting)
 Le système croise les données toutes les minutes pour détecter les zones critiques :
@@ -58,13 +58,13 @@ graph LR
 
 | Composant | Technologie | Version | Description |
 |-----------|-------------|---------|-------------|
-| **Ingestion** | **Apache Kafka** | 7.6 (KRaft) | Bus d'événements (Sans Zookeeper) |
-| **Simulation** | **Node-RED** | 3.1 | Générateur de flux IoT (HTTP/Kafka) |
-| **Processing** | **Apache Spark** | 3.3.0 | Moteur de calcul distribué (Scala 2.12) |
-| **Stockage Froid** | **HDFS** | 3.2.1 | Data Lake distribué (Namenode/Datanode) |
-| **Stockage Chaud** | **Cassandra** | 4.1 | Base NoSQL orientée colonnes |
-| **Visualisation** | **Grafana** | Latest | Dashboarding temps réel |
-| **Orchestration** | **Docker** | 24+ | Conteneurisation complète |
+| **`Ingestion`** | **Apache Kafka** | 7.6 (KRaft) | Bus d'événements (Sans Zookeeper) |
+| **`Simulation`** | **Node-RED** | 3.1 | Générateur de flux IoT (HTTP/Kafka) |
+| **`Processing`** | **Apache Spark** | 3.3.0 | Moteur de calcul distribué (Scala 2.12) |
+| **`Stockage Froid`** | **HDFS** | 3.2.1 | Data Lake distribué (Namenode/Datanode) |
+| **`Stockage Chaud`** | **Cassandra** | 4.1 | Base NoSQL orientée colonnes |
+| **`Visualisation`** | **Grafana** | Latest | Dashboarding temps réel |
+| **`Orchestration`** | **Docker** | 24+ | Conteneurisation complète |
 
 ---
 
